@@ -39,7 +39,7 @@ from dataclasses import dataclass, asdict, field
 from typing import Dict, Optional, List, Tuple
 
 from aiogram import Bot, Dispatcher, Router, types, F
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command, CommandStart, CommandObject
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -735,7 +735,7 @@ async def cmd_settings(message: types.Message):
 # ── /words ──────────────────────────────────────────────────
 
 @router.message(Command("words"))
-async def cmd_words(message: types.Message, command: Command):
+async def cmd_words(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         s = get_settings(message.chat.id)
@@ -759,7 +759,7 @@ async def cmd_words(message: types.Message, command: Command):
 # ── /delay ──────────────────────────────────────────────────
 
 @router.message(Command("delay"))
-async def cmd_delay(message: types.Message, command: Command):
+async def cmd_delay(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         s = get_settings(message.chat.id)
@@ -783,7 +783,7 @@ async def cmd_delay(message: types.Message, command: Command):
 # ── /target ─────────────────────────────────────────────────
 
 @router.message(Command("target"))
-async def cmd_target(message: types.Message, command: Command):
+async def cmd_target(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         s = get_settings(message.chat.id)
@@ -856,7 +856,7 @@ async def cmd_shuffle(message: types.Message):
 # ── /remove ─────────────────────────────────────────────────
 
 @router.message(Command("remove"))
-async def cmd_remove(message: types.Message, command: Command):
+async def cmd_remove(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         await message.answer("❌ Укажите номер: <code>/remove 2</code>", parse_mode=ParseMode.HTML)
@@ -982,7 +982,7 @@ async def cmd_add(message: types.Message, command: Command, state: FSMContext):
 # ── /addtype — add text to queue ────────────────────────────
 
 @router.message(Command("addtype"))
-async def cmd_addtype(message: types.Message, command: Command):
+async def cmd_addtype(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         await message.answer("✏️ Укажите текст: <code>/addtype Ваш текст песни</code>", parse_mode=ParseMode.HTML)
@@ -1156,7 +1156,7 @@ async def process_queue_song_selection(callback: types.CallbackQuery, state: FSM
 # ── /type — animate provided text ──────────────────────────
 
 @router.message(Command("type"))
-async def cmd_type(message: types.Message, command: Command):
+async def cmd_type(message: types.Message, command: CommandObject):
     args = command.args
     if not args:
         await message.answer("✏️ Укажите текст: <code>/type Ваш текст</code>", parse_mode=ParseMode.HTML)
