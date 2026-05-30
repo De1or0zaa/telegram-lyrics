@@ -138,4 +138,3 @@ telegram-lyrics-bot/
 ## Лицензия
 
 MIT
-"# telegram-lyrics" 
